@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GlobalStyle, Wrapper } from './App.styles';
 import { Difficulty, fetchQuizQuestions, QuestionState } from './Components/API/API';
 import QuestionCardComponent from './Components/QuestionCard/QuestionCard';
 
@@ -69,13 +70,14 @@ const App = () => {
 
   return (
     <>
-      <div className="App">
+      <GlobalStyle />
+      <Wrapper>
         <h1>React TypeScript Quiz</h1>
         {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <button className='start' onClick={startTrivia}>
           Start
         </button>) : null}
-        {!gameOver ? <p className='score'>Score: </p> : null}
+        {!gameOver ? <p className='score'>Score: {score}</p> : null}
         {loading && <p>Loading questions..</p>}
         {!loading && !gameOver && (
           <QuestionCardComponent 
@@ -90,7 +92,7 @@ const App = () => {
         {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
           <button className='next' onClick={nextQuestion}>Next Question</button>
           ) : null}
-      </div>
+      </Wrapper>
     </>
   );
 };
